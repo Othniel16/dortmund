@@ -33,12 +33,6 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-            // Expanded(
-            //   child: Container(
-            //     color: Colors.black,
-            //     child: const Carousel(),
-            //   ),
-            // ),
             const Footer(),
           ],
         ),
