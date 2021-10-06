@@ -18,12 +18,27 @@ class Header extends StatelessWidget {
             ),
             child: Image.asset(Images.logo),
           ),
-          const Text(
-            'MENU',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+          InkWell(
+            child: const Text(
+              'MENU',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 16.0,
+              ),
+            ),
+            onTap: onMenuPress,
           ),
         ],
       ),
     );
+  }
+
+  bool onMenuPress() {
+    if (menuKey.currentState!.isDrawerOpen) {
+      menuKey.currentState!.closeDrawer();
+    } else {
+      menuKey.currentState!.openDrawer();
+    }
+    return true;
   }
 }
