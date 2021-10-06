@@ -18,11 +18,12 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      Images.woman,
-      fit: BoxFit.cover,
-      width: MediaQuery.of(context).size.width / 4,
-      height: MediaQuery.of(context).size.height / 7,
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Padding(
+      padding:
+          EdgeInsets.only(left: screenWidth / 30, bottom: screenHeight / 20),
+      child: Image.asset(Images.hiThere),
     );
   }
 }
@@ -33,90 +34,80 @@ class RightWidget extends StatelessWidget {
   final String submit = 'SUBMIT';
   final String title = 'Hi There ...';
   final String invite = '''We’d like you to be a part of this project – your
-submission to our quick survey is welcome ❤''';
+submission to our quick survey is welcome  ❤''';
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 0.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height / 1.4,
-        child: Stack(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30.0),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: FontSizes.large,
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                Text(
-                  invite,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: FontSizes.regular,
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-                Container(
-                  color: Colors.grey,
-                  height: 1.5,
-                  width: MediaQuery.of(context).size.width / 3,
-                ),
-                const SizedBox(height: 30.0),
-                const UserInfo(),
-                const SizedBox(height: 45.0),
-                Consumer<CarouselPagesProvider>(
-                    builder: (context, pageProvider, child) {
-                  return InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15.0,
-                        vertical: 10.0,
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white)),
-                      child: Text(
-                        submit,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    onTap: () {
-                      pageProvider
-                          .togglePageIndex(pageProvider.currentPage + 1);
-                      carouselController.animateToPage(
-                        pageProvider.currentPage,
-                        curve: Curves.linear,
-                      );
-                    },
-                  );
-                }),
-              ],
-            ),
-            Positioned(
-              right: 0.0,
-              bottom: 0.0,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width / 7,
-                  maxHeight: MediaQuery.of(context).size.width / 5,
-                ),
-                // child: Image.asset(Images.woman),
-                child: Container(
-                  width: 50.0,
-                  height: 50.0,
-                  color: Colors.amberAccent,
-                ),
+            const SizedBox(height: 30.0),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: FontSizes.large,
               ),
             ),
+            const SizedBox(height: 30.0),
+            Text(
+              invite,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: FontSizes.regular,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            Container(
+              color: Colors.grey,
+              height: 1.5,
+              width: MediaQuery.of(context).size.width / 3,
+            ),
+            const SizedBox(height: 30.0),
+            const UserInfo(),
+            const SizedBox(height: 45.0),
+            Consumer<CarouselPagesProvider>(
+                builder: (context, pageProvider, child) {
+              return InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15.0,
+                    vertical: 10.0,
+                  ),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  child: Text(
+                    submit,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                onTap: () {
+                  pageProvider.togglePageIndex(pageProvider.currentPage + 1);
+                  carouselController.animateToPage(
+                    pageProvider.currentPage,
+                    curve: Curves.linear,
+                  );
+                },
+              );
+            }),
           ],
         ),
-      ),
+        Positioned(
+          right: screenWidth / 18,
+          bottom: screenHeight / 5,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: screenWidth / 30,
+              maxHeight: screenWidth / 30,
+            ),
+            child: Image.asset(Images.moon),
+          ),
+        ),
+      ],
     );
   }
 }
