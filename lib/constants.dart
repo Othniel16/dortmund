@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Images {
   static const String logo = 'assets/images/logo.png';
   static const String disruption = 'assets/images/disruption.jpg';
@@ -16,4 +18,8 @@ class Images {
 class FontSizes {
   static const large = 45.0;
   static const regular = 18.0;
+}
+
+class SiteColors {
+  static const brown = Color(0xFFFFB369);
 }
