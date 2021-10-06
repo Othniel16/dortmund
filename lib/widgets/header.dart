@@ -1,8 +1,15 @@
 import 'package:dortmund/exports.dart';
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
+
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  bool isMenuOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +26,9 @@ class Header extends StatelessWidget {
             child: Image.asset(Images.logo),
           ),
           InkWell(
-            child: const Text(
-              'MENU',
-              style: TextStyle(
+            child: Text(
+              isMenuOpen ? 'CLOSE' : 'MENU',
+              style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 16.0,
               ),
@@ -33,12 +40,17 @@ class Header extends StatelessWidget {
     );
   }
 
-  bool onMenuPress() {
+  void onMenuPress() {
     if (menuKey.currentState!.isDrawerOpen) {
       menuKey.currentState!.closeDrawer();
+      setState(() {
+        isMenuOpen = false;
+      });
     } else {
       menuKey.currentState!.openDrawer();
+      setState(() {
+        isMenuOpen = true;
+      });
     }
-    return true;
   }
 }
