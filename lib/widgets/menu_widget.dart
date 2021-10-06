@@ -82,7 +82,7 @@ class RightWidget extends StatelessWidget {
               Text(
                 launchDate,
                 style: const TextStyle(
-                  color: Color(0xFFFFB369),
+                  color: SiteColors.brown,
                   fontSize: FontSizes.large,
                 ),
               ),
