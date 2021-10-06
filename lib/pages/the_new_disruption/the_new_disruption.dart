@@ -35,90 +35,84 @@ class RightWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 0.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height / 1.4,
-        child: Stack(
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30.0),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: FontSizes.large,
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                Text(
-                  womensMagazine,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: FontSizes.regular,
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-                Container(
-                  color: Colors.grey,
-                  height: 1.5,
-                  width: MediaQuery.of(context).size.width / 3,
-                ),
-                const SizedBox(height: 20.0),
-                Text(
-                  comingSoon,
-                  style: const TextStyle(
-                    color: Color(0xFFFFB369),
-                    fontSize: FontSizes.regular,
-                  ),
-                ),
-                const SizedBox(height: 45.0),
-                Consumer<CarouselPagesProvider>(
-                  builder: (context, pageProvider, child) {
-                    return InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0,
-                          vertical: 10.0,
-                        ),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white)),
-                        child: Text(
-                          joinUs,
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+            const SizedBox(height: 30.0),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: FontSizes.large,
+              ),
+            ),
+            const SizedBox(height: 30.0),
+            Text(
+              womensMagazine,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: FontSizes.regular,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            Container(
+              color: Colors.grey,
+              height: 1.5,
+              width: MediaQuery.of(context).size.width / 3,
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              comingSoon,
+              style: const TextStyle(
+                color: Color(0xFFFFB369),
+                fontSize: FontSizes.regular,
+              ),
+            ),
+            const SizedBox(height: 45.0),
+            Consumer<CarouselPagesProvider>(
+              builder: (context, pageProvider, child) {
+                return InkWell(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0,
+                      vertical: 10.0,
+                    ),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.white)),
+                    child: Text(
+                      joinUs,
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
-                      onTap: () {
-                        pageProvider
-                            .togglePageIndex(pageProvider.currentPage + 1);
-                        carouselController.animateToPage(
-                          pageProvider.currentPage,
-                          curve: Curves.linear,
-                        );
-                      },
+                    ),
+                  ),
+                  onTap: () {
+                    pageProvider.togglePageIndex(pageProvider.currentPage + 1);
+                    carouselController.animateToPage(
+                      pageProvider.currentPage,
+                      curve: Curves.linear,
                     );
                   },
-                ),
-              ],
-            ),
-            Positioned(
-              right: 0.0,
-              bottom: 0.0,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width / 7,
-                  maxHeight: MediaQuery.of(context).size.width / 5,
-                ),
-                child: Image.asset(Images.woman),
-              ),
+                );
+              },
             ),
           ],
         ),
-      ),
+        Positioned(
+          right: 0.0,
+          bottom: screenHeight / 10,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width / 7,
+              maxHeight: MediaQuery.of(context).size.width / 5,
+            ),
+            child: Image.asset(Images.woman),
+          ),
+        ),
+      ],
     );
   }
 }
