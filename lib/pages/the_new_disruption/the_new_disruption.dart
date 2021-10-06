@@ -67,7 +67,7 @@ class RightWidget extends StatelessWidget {
             Text(
               comingSoon,
               style: const TextStyle(
-                color: Color(0xFFFFB369),
+                color: SiteColors.brown,
                 fontSize: FontSizes.regular,
               ),
             ),
