@@ -8,16 +8,24 @@ class CenterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Row(
       children: [
-        Container(
-          child: leftChild,
-          color: Colors.redAccent,
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width / 2,
+        Expanded(
+          child: SizedBox(
+            child: leftChild,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width / 2,
+          ),
         ),
         const SizedBox(width: 70.0),
-        Expanded(child: rightChild),
+        Expanded(
+            child: Padding(
+          padding:
+              EdgeInsets.only(right: screenWidth / 25, top: screenHeight / 35),
+          child: rightChild,
+        )),
       ],
     );
   }
