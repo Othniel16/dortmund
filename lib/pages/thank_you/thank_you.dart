@@ -39,7 +39,7 @@ class RightWidget extends StatelessWidget {
   final String share = 'Share';
   final String follow = 'Follow';
   final String sendUsYourQuestions =
-      'Do send us your questions, reviews and partnership offers';
+      'Do send us your questions,\nreviews and partnership offers';
   final String email = 'hello@sistazshare.org';
 
   @override
@@ -110,7 +110,7 @@ class RightWidget extends StatelessWidget {
             Text(
               email,
               style: const TextStyle(
-                color: Color(0xFFFFB369),
+                color: SiteColors.brown,
                 fontSize: FontSizes.regular,
               ),
             ),
