@@ -1,5 +1,6 @@
 import 'package:dortmund/exports.dart';
 import 'package:flutter/material.dart';
+import 'package:dortmund/pages/hi_there/hi_there.dart';
 import 'package:dortmund/pages/the_new_disruption/the_new_disruption.dart';
 
 class CarouselPagesProvider extends ChangeNotifier {
@@ -8,7 +9,7 @@ class CarouselPagesProvider extends ChangeNotifier {
   final List<Widget> pages = [
     const TheNewDisruption(),
     const HiThere(),
-    const ThankYou()
+    const ThankYou(),
   ];
 
   void togglePageIndex(int index) {
