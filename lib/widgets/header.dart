@@ -15,28 +15,39 @@ class _HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width / 7,
-              maxHeight: MediaQuery.of(context).size.height / 12,
-            ),
-            child: Image.asset(Images.logo),
-          ),
-          InkWell(
-            child: Text(
-              isMenuOpen ? 'CLOSE' : 'MENU',
-              style: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
+      child: ResponsiveBuilder(builder: (context, sizingInformation) {
+        double maxLogoWidth;
+        if (sizingInformation.isDesktop) {
+          maxLogoWidth = MediaQuery.of(context).size.width / 7;
+        } else if (sizingInformation.isTablet) {
+          maxLogoWidth = MediaQuery.of(context).size.width / 5.5;
+        } else {
+          maxLogoWidth = MediaQuery.of(context).size.width / 3.5;
+        }
+        double menuTextSize = sizingInformation.isMobile ? 14.0 : 16.0;
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: maxLogoWidth,
+                maxHeight: MediaQuery.of(context).size.height / 12,
               ),
+              child: Image.asset(Images.logo),
             ),
-            onTap: onMenuPress,
-          ),
-        ],
-      ),
+            InkWell(
+              child: Text(
+                isMenuOpen ? 'CLOSE' : 'MENU',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: menuTextSize,
+                ),
+              ),
+              onTap: onMenuPress,
+            ),
+          ],
+        );
+      }),
     );
   }
 
