@@ -44,91 +44,115 @@ class RightWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30.0),
-            Text(
-              thankYou,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: FontSizes.large,
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      double titleSize =
+          sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
+      return Stack(
+        children: [
+          Column(
+            crossAxisAlignment: sizingInformation.isMobile
+                ? CrossAxisAlignment.center
+                : CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30.0),
+              Text(
+                thankYou,
+                style: TextStyle(color: Colors.white, fontSize: titleSize),
               ),
-            ),
-            const SizedBox(height: 30.0),
-            RichText(
-              text: TextSpan(
-                  text: like,
+              const SizedBox(height: 30.0),
+              RichText(
+                text: TextSpan(
+                    text: like,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: FontSizes.regular,
+                      fontFamily: 'Cera Pro',
+                    ),
+                    children: [
+                      bulletWidget(),
+                      TextSpan(text: share),
+                      bulletWidget(),
+                      TextSpan(text: follow),
+                    ]),
+              ),
+              const SizedBox(height: 20.0),
+              // divider
+              Container(
+                color: Colors.grey,
+                height: 1.5,
+                width: MediaQuery.of(context).size.width / 3,
+              ),
+              const SizedBox(height: 20.0),
+
+              sizingInformation.isMobile
+                  ? const SocialMediaIcons(
+                      mainAxisAlignment: MainAxisAlignment.center)
+                  : const SocialMediaIcons(),
+
+              const SizedBox(height: 50.0),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: sizingInformation.isDesktop
+                      ? MediaQuery.of(context).size.width / 4
+                      : double.infinity,
+                ),
+                child: Text(
+                  sendUsYourQuestions,
+                  maxLines: 2,
+                  textAlign: sizingInformation.isMobile
+                      ? TextAlign.center
+                      : TextAlign.start,
                   style: const TextStyle(
-                    color: Colors.white,
                     fontSize: FontSizes.regular,
-                    fontFamily: 'Cera Pro',
+                    color: Colors.white,
                   ),
-                  children: [
-                    bulletWidget(),
-                    TextSpan(text: share),
-                    bulletWidget(),
-                    TextSpan(text: follow),
-                  ]),
-            ),
-            const SizedBox(height: 20.0),
-            // divider
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 3,
-            ),
-            const SizedBox(height: 20.0),
-
-            const SocialMediaIcons(),
-
-            const SizedBox(height: 50.0),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width / 4,
-              ),
-              child: Text(
-                sendUsYourQuestions,
-                maxLines: 2,
-                softWrap: true,
-                style: const TextStyle(
-                  fontSize: FontSizes.regular,
-                  color: Colors.white,
                 ),
               ),
-            ),
-            const SizedBox(height: 20.0),
-            // divider
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 4,
-            ),
-            const SizedBox(height: 20.0),
-            Text(
-              email,
-              style: const TextStyle(
-                color: SiteColors.brown,
-                fontSize: FontSizes.regular,
+              const SizedBox(height: 20.0),
+              // divider
+              Container(
+                color: Colors.grey,
+                height: 1.5,
+                width: MediaQuery.of(context).size.width / 4,
               ),
-            ),
-          ],
-        ),
-        Positioned(
-          right: 0.0,
-          bottom: 0.0,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width / 8,
-              maxHeight: MediaQuery.of(context).size.width / 8,
-            ),
-            child: Image.asset(Images.cloudAndTriangle),
+              const SizedBox(height: 20.0),
+              Text(
+                email,
+                style: const TextStyle(
+                  color: SiteColors.brown,
+                  fontSize: FontSizes.regular,
+                ),
+              ),
+              sizingInformation.isMobile
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 40.0),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width / 5,
+                          maxHeight: MediaQuery.of(context).size.width / 4,
+                        ),
+                        child: Image.asset(Images.cloudAndTriangle),
+                      ),
+                    )
+                  : Container(),
+            ],
           ),
-        ),
-      ],
-    );
+          sizingInformation.isMobile
+              ? Container()
+              : Positioned(
+                  right: 0.0,
+                  bottom: 0.0,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width / 8,
+                      maxHeight: MediaQuery.of(context).size.width / 8,
+                    ),
+                    child: Image.asset(Images.cloudAndTriangle),
+                  ),
+                ),
+        ],
+      );
+    });
   }
 
   WidgetSpan bulletWidget() {
