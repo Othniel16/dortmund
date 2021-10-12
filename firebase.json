@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "dortmund-2f80c",
     "public": "build/web",
     "ignore": [
       "firebase.json",
