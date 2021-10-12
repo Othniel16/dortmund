@@ -17,6 +17,7 @@ class Images {
 
 class FontSizes {
   static const large = 45.0;
+  static const semiLarge = 35.0;
   static const regular = 18.0;
 }
 
