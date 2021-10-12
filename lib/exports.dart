@@ -14,4 +14,5 @@ export 'package:dortmund/state_management/carousel_pages_provider.dart';
 export 'package:provider/provider.dart';
 export 'package:expandable/expandable.dart';
 export 'package:flutter_bounce/flutter_bounce.dart';
+export 'package:responsive_builder/responsive_builder.dart';
 export 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
