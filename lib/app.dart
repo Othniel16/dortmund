@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Cera Pro'),
+        theme: ThemeData(fontFamily: 'mazzardm-light'),
         home: const Home(),
       ),
     );
