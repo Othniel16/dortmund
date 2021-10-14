@@ -41,9 +41,6 @@ flutter:
     - assets/images/
 
   fonts:
-    - family: Cera Pro
+    - family: mazzardm-light
       fonts:
-        - asset: assets/fonts/Cera Pro Light.ttf
-        - asset: assets/fonts/Cera Pro Bold.otf
-          weight: 700
-
+        - asset: assets/fonts/mazzardm-light.otf
