@@ -30,127 +30,121 @@ class LeftWidget extends StatelessWidget {
   }
 }
 
-class RightWidget extends StatelessWidget {
+class RightWidget extends StatefulWidget {
   const RightWidget({Key? key}) : super(key: key);
 
+  @override
+  State<RightWidget> createState() => _RightWidgetState();
+}
+
+class _RightWidgetState extends State<RightWidget> {
   final String bullet = "\u2022 ";
+
   final String thankYou = 'Thank You !';
+
+  final String backToHome = 'BACK TO HOME';
+
   final String like = 'Like';
+
   final String share = 'Share';
+
   final String follow = 'Follow';
+
   final String sendUsYourQuestions =
       'Do send us your questions,\nreviews and partnership offers';
+
   final String email = 'hello@sistazshare.org';
+
+  late CarouselPagesProvider pagesProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    pagesProvider = Provider.of<CarouselPagesProvider>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
           sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
-      return Stack(
-        children: [
-          Column(
-            crossAxisAlignment: sizingInformation.isMobile
-                ? CrossAxisAlignment.center
-                : CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 30.0),
-              Text(
-                thankYou,
-                style: TextStyle(color: Colors.white, fontSize: titleSize),
-              ),
-              const SizedBox(height: 30.0),
-              RichText(
-                text: TextSpan(
-                    text: like,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: FontSizes.regular,
-                      fontFamily: 'Cera Pro',
-                    ),
-                    children: [
-                      bulletWidget(),
-                      TextSpan(text: share),
-                      bulletWidget(),
-                      TextSpan(text: follow),
-                    ]),
-              ),
-              const SizedBox(height: 20.0),
-              // divider
-              Container(
-                color: Colors.grey,
-                height: 1.5,
-                width: MediaQuery.of(context).size.width / 3,
-              ),
-              const SizedBox(height: 20.0),
-
-              sizingInformation.isMobile
-                  ? const SocialMediaIcons(
-                      mainAxisAlignment: MainAxisAlignment.center)
-                  : const SocialMediaIcons(),
-
-              const SizedBox(height: 50.0),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: sizingInformation.isDesktop
-                      ? MediaQuery.of(context).size.width / 4
-                      : double.infinity,
-                ),
-                child: Text(
-                  sendUsYourQuestions,
-                  maxLines: 2,
-                  textAlign: sizingInformation.isMobile
-                      ? TextAlign.center
-                      : TextAlign.start,
+      return Container(
+        padding: sizingInformation.isMobile
+            ? EdgeInsets.zero
+            : EdgeInsets.only(left: screenWidth / 25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 30.0),
+            Text(
+              thankYou,
+              style: TextStyle(color: Colors.white, fontSize: titleSize),
+            ),
+            const SizedBox(height: 30.0),
+            RichText(
+              text: TextSpan(
+                  text: like,
                   style: const TextStyle(
-                    fontSize: FontSizes.regular,
                     color: Colors.white,
+                    fontSize: FontSizes.regular,
+                    fontFamily: 'Cera Pro',
                   ),
-                ),
+                  children: [
+                    bulletWidget(),
+                    TextSpan(text: share),
+                    bulletWidget(),
+                    TextSpan(text: follow),
+                  ]),
+            ),
+            const SizedBox(height: 20.0),
+            // divider
+            Container(
+              color: Colors.grey,
+              height: 1.5,
+              width: MediaQuery.of(context).size.width / 3,
+            ),
+            const SizedBox(height: 20.0),
+
+            const SocialMediaIcons(),
+
+            const SizedBox(height: 50.0),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: sizingInformation.isDesktop
+                    ? MediaQuery.of(context).size.width / 4
+                    : double.infinity,
               ),
-              const SizedBox(height: 20.0),
-              // divider
-              Container(
-                color: Colors.grey,
-                height: 1.5,
-                width: MediaQuery.of(context).size.width / 4,
-              ),
-              const SizedBox(height: 20.0),
-              Text(
-                email,
+              child: Text(
+                sendUsYourQuestions,
+                maxLines: 2,
                 style: const TextStyle(
-                  color: SiteColors.brown,
                   fontSize: FontSizes.regular,
+                  color: Colors.white,
                 ),
               ),
-              sizingInformation.isMobile
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width / 5,
-                          maxHeight: MediaQuery.of(context).size.width / 4,
-                        ),
-                        child: Image.asset(Images.cloudAndTriangle),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-          sizingInformation.isMobile
-              ? Container()
-              : Positioned(
-                  right: 0.0,
-                  bottom: 0.0,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 8,
-                      maxHeight: MediaQuery.of(context).size.width / 8,
-                    ),
-                    child: Image.asset(Images.cloudAndTriangle),
-                  ),
-                ),
-        ],
+            ),
+            const SizedBox(height: 20.0),
+            // divider
+            Container(
+              color: Colors.grey,
+              height: 1.5,
+              width: MediaQuery.of(context).size.width / 4,
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              email,
+              style: const TextStyle(
+                color: SiteColors.brown,
+                fontSize: FontSizes.regular,
+              ),
+            ),
+
+            const SizedBox(height: 45.0),
+
+            ActionButton(label: backToHome, onTap: onBackToHomeTap),
+          ],
+        ),
       );
     });
   }
@@ -163,10 +157,18 @@ class RightWidget extends StatelessWidget {
         glyph.bullet,
         style: const TextStyle(
           color: Colors.white,
-          fontSize: 15.0,
+          fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
       ),
     ));
+  }
+
+  void onBackToHomeTap() {
+    pagesProvider.togglePageIndex(0);
+    carouselController.animateToPage(pagesProvider.currentPage);
+
+    // todo
+    // reset any form data
   }
 }
