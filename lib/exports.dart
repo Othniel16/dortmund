@@ -6,6 +6,7 @@ export 'package:dortmund/constants.dart';
 export 'package:dortmund/widgets/header.dart';
 export 'package:dortmund/widgets/footer.dart';
 export 'package:dortmund/widgets/center_widget.dart';
+export 'package:dortmund/widgets/action_button.dart';
 export 'package:carousel_slider/carousel_slider.dart';
 export 'package:dortmund/widgets/social_media_icons.dart';
 export 'package:dortmund/state_management/carousel_pages_provider.dart';
