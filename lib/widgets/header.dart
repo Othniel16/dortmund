@@ -13,27 +13,35 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: ResponsiveBuilder(builder: (context, sizingInformation) {
-        double maxLogoWidth;
-        if (sizingInformation.isDesktop) {
-          maxLogoWidth = MediaQuery.of(context).size.width / 7;
-        } else if (sizingInformation.isTablet) {
-          maxLogoWidth = MediaQuery.of(context).size.width / 5.5;
-        } else {
-          maxLogoWidth = MediaQuery.of(context).size.width / 3.5;
-        }
-        double menuTextSize = sizingInformation.isMobile ? 14.0 : 16.0;
-        return Row(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      double maxLogoWidth;
+      if (sizingInformation.isDesktop) {
+        maxLogoWidth = MediaQuery.of(context).size.width / 7;
+      } else if (sizingInformation.isTablet) {
+        maxLogoWidth = MediaQuery.of(context).size.width / 5.5;
+      } else {
+        maxLogoWidth = MediaQuery.of(context).size.width / 3.5;
+      }
+      double menuTextSize = sizingInformation.isMobile ? 14.0 : 16.0;
+      double headerPadding =
+          sizingInformation.isMobile ? screenWidth / 25 : 0.0;
+      return Padding(
+        padding:
+            EdgeInsets.symmetric(vertical: 20.0, horizontal: headerPadding),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: maxLogoWidth,
-                maxHeight: MediaQuery.of(context).size.height / 12,
+                maxHeight: sizingInformation.isMobile
+                    ? MediaQuery.of(context).size.height / 30
+                    : MediaQuery.of(context).size.height / 12,
               ),
-              child: Image.asset(Images.logo),
+              child: sizingInformation.isMobile
+                  ? Image.asset(Images.logoAbstract)
+                  : Image.asset(Images.logo),
             ),
             InkWell(
               child: Text(
@@ -46,9 +54,9 @@ class _HeaderState extends State<Header> {
               onTap: onMenuPress,
             ),
           ],
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 
   void onMenuPress() {
