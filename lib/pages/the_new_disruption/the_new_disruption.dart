@@ -42,12 +42,12 @@ class _RightWidgetState extends State<RightWidget> {
 
   final String comingSoon = 'Coming Soon';
 
-  late CarouselPagesProvider pagesProvider;
+  late PagesProvider pagesProvider;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    pagesProvider = Provider.of<CarouselPagesProvider>(context, listen: false);
+    pagesProvider = Provider.of<PagesProvider>(context, listen: false);
   }
 
   @override
@@ -100,6 +100,5 @@ class _RightWidgetState extends State<RightWidget> {
 
   void onJoinUsTap() {
     pagesProvider.togglePageIndex(pagesProvider.currentPage + 1);
-    carouselController.animateToPage(pagesProvider.currentPage);
   }
 }
