@@ -53,50 +53,45 @@ class RightWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    return Padding(
-      padding: EdgeInsets.only(
-        right: screenWidth / 25,
-        top: screenHeight / 35,
-        left: screenWidth / 25,
-      ),
-      child: ResponsiveBuilder(builder: (context, sizingInformation) {
-        double titleSize =
-            sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
-        return Container(
-          padding: sizingInformation.isMobile
-              ? EdgeInsets.zero
-              : EdgeInsets.only(left: screenWidth / 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 30.0),
-              Text(
-                comingSoon,
-                style: TextStyle(color: Colors.white, fontSize: titleSize),
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      double titleSize =
+          sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
+      return Container(
+        padding: EdgeInsets.only(
+          left: screenWidth / 25,
+          right: screenHeight / 25,
+          top: screenHeight / 35,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 30.0),
+            Text(
+              comingSoon,
+              style: TextStyle(color: Colors.white, fontSize: titleSize),
+            ),
+            const SizedBox(height: 30.0),
+            Text(
+              launching,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: FontSizes.regular,
               ),
-              const SizedBox(height: 30.0),
-              Text(
-                launching,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: FontSizes.regular,
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              Container(
-                color: Colors.grey,
-                height: 1.5,
-                width: MediaQuery.of(context).size.width / 2.8,
-              ),
-              const SizedBox(height: 30.0),
-              Text(
-                launchDate,
-                style: TextStyle(color: SiteColors.brown, fontSize: titleSize),
-              ),
-            ],
-          ),
-        );
-      }),
-    );
+            ),
+            const SizedBox(height: 20.0),
+            Container(
+              color: Colors.grey,
+              height: 1.5,
+              width: MediaQuery.of(context).size.width / 2.8,
+            ),
+            const SizedBox(height: 30.0),
+            Text(
+              launchDate,
+              style: TextStyle(color: SiteColors.brown, fontSize: titleSize),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
