@@ -31,3 +31,13 @@ const List<String> ageGroups = [
   '46 - 60',
   '60+'
 ];
+
+const List<String> genderOptions = ['Male', 'Female'];
+
+const List<String> interestOptions = [
+  'Writing',
+  'Advocacy',
+  'Counseling',
+  'Empowerment',
+  'Other digital media',
+];
