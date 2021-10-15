@@ -66,17 +66,19 @@ class _RightWidgetState extends State<RightWidget> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
           sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
       return Container(
-        padding: sizingInformation.isMobile
-            ? EdgeInsets.zero
-            : EdgeInsets.only(left: screenWidth / 25),
+        padding: EdgeInsets.only(
+          left: screenWidth / 25,
+          right: screenHeight / 25,
+          top: screenHeight / 35,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30.0),
             Text(
               thankYou,
               style: TextStyle(color: Colors.white, fontSize: titleSize),
@@ -140,9 +142,11 @@ class _RightWidgetState extends State<RightWidget> {
               ),
             ),
 
-            const SizedBox(height: 45.0),
+            const SizedBox(height: 30.0),
 
             ActionButton(label: backToHome, onTap: onBackToHomeTap),
+
+            SizedBox(height: screenHeight / 20),
           ],
         ),
       );
