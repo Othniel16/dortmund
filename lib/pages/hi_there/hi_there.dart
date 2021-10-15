@@ -200,6 +200,8 @@ submission to our quick survey is welcome  ❤''';
       child: TextField(
         maxLength: 20,
         onChanged: (value) => occupation = value,
+        style: const TextStyle(color: Colors.white),
+        textCapitalization: TextCapitalization.words,
         decoration: textFieldDeco(hintText: 'Occupation'),
       ),
     );
@@ -212,6 +214,8 @@ submission to our quick survey is welcome  ❤''';
         maxLength: 30,
         keyboardType: TextInputType.name,
         onChanged: (value) => name = value,
+        style: const TextStyle(color: Colors.white),
+        textCapitalization: TextCapitalization.words,
         decoration: textFieldDeco(hintText: 'Name'),
       ),
     );
@@ -224,7 +228,9 @@ submission to our quick survey is welcome  ❤''';
       child: TextField(
         maxLength: 100,
         onChanged: (value) => note = value,
+        style: const TextStyle(color: Colors.white),
         decoration: textFieldDeco(hintText: hintText),
+        textCapitalization: TextCapitalization.sentences,
       ),
     );
   }
@@ -235,6 +241,7 @@ submission to our quick survey is welcome  ❤''';
       child: TextField(
         keyboardType: TextInputType.url,
         onChanged: (value) => url = value,
+        style: const TextStyle(color: Colors.white),
         decoration: textFieldDeco(hintText: 'Social media url'),
       ),
     );
