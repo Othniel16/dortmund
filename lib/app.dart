@@ -8,8 +8,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<CarouselPagesProvider>(
-            create: (_) => CarouselPagesProvider()),
+        ChangeNotifierProvider<PagesProvider>(
+            create: (_) => PagesProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
