@@ -12,31 +12,38 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Header(),
-            Expanded(
-              child: SliderMenuContainer(
-                key: menuKey,
-                hasAppBar: false,
-                sliderMenu: const MenuWidget(),
-                slideDirection: SlideDirection.TOP_TO_BOTTOM,
-                sliderMenuOpenSize: MediaQuery.of(context).size.height,
-                sliderMain: Container(
-                  color: Colors.black,
-                  child: const Carousel(),
+      body: ResponsiveBuilder(builder: (context, sizingInformation) {
+        return Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: sizingInformation.isMobile ? 0.0 : 30.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Header(),
+              Expanded(
+                child: SliderMenuContainer(
+                  key: menuKey,
+                  hasAppBar: false,
+                  sliderMenu: const MenuWidget(),
+                  slideDirection: SlideDirection.TOP_TO_BOTTOM,
+                  sliderMenuOpenSize: MediaQuery.of(context).size.height,
+                  sliderMain: Consumer<PagesProvider>(
+                    builder: (context, pagesProvider, child) {
+                      return Container(
+                        color: Colors.black,
+                        child: pagesProvider.pages[pagesProvider.currentPage],
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-            const Footer(),
-          ],
-        ),
-      ),
+              sizingInformation.isMobile ? Container() : const Footer(),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
