@@ -39,15 +39,14 @@ class CenterWidget extends StatelessWidget {
                   child: SizedBox(
                     child: leftChild,
                     height: MediaQuery.of(context).size.height,
-                    // width: MediaQuery.of(context).size.width / 2,
                   ),
                 ),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
                       left: sizingInformation.isMobile ? screenWidth / 25 : 0.0,
+                      right: screenWidth / 25,
                       top: screenHeight / 35,
-                      bottom: screenHeight / 10,
                     ),
                     child: rightChild,
                   ),
