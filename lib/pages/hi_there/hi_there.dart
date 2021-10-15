@@ -41,12 +41,12 @@ class _RightWidgetState extends State<RightWidget> {
   final String invite = '''We’d like you to be a part of this project – your
 submission to our quick survey is welcome  ❤''';
 
-  late CarouselPagesProvider pagesProvider;
+  late PagesProvider pagesProvider;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    pagesProvider = Provider.of<CarouselPagesProvider>(context, listen: false);
+    pagesProvider = Provider.of<PagesProvider>(context, listen: false);
   }
 
   @override
@@ -55,7 +55,7 @@ submission to our quick survey is welcome  ❤''';
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
           sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
-      return Container(
+      return SingleChildScrollView(
         padding: sizingInformation.isMobile
             ? EdgeInsets.zero
             : EdgeInsets.only(left: screenWidth / 25),
@@ -82,11 +82,18 @@ submission to our quick survey is welcome  ❤''';
               width: MediaQuery.of(context).size.width / 3,
             ),
             const SizedBox(height: 30.0),
-            const UserInfo(label: 'Age Group'),
+            UserInfo(label: 'Age Group', content: ageList(sizingInformation)),
             const UserInfo(label: 'Country'),
             const UserInfo(label: 'Gender'),
             const UserInfo(label: 'Occupation'),
             const SizedBox(height: 45.0),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: 12,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Container(color: Colors.amber);
+                }),
             ActionButton(label: submit, onTap: onSubmitTap),
           ],
         ),
@@ -94,15 +101,32 @@ submission to our quick survey is welcome  ❤''';
     });
   }
 
+  Widget ageList(SizingInformation sizingInformation) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: GroupButton(
+        spacing: 10.0,
+        runSpacing: 8.0,
+        borderRadius: BorderRadius.circular(8.0),
+        groupingType: GroupingType.wrap,
+        selectedColor: SiteColors.brown,
+        mainGroupAlignment: MainGroupAlignment.start,
+        onSelected: (index, isSelected) => print('$index button is selected'),
+        buttons: ageGroups,
+      ),
+    );
+  }
+
   void onSubmitTap() {
     pagesProvider.togglePageIndex(pagesProvider.currentPage + 1);
-    carouselController.animateToPage(pagesProvider.currentPage);
   }
 }
 
 class UserInfo extends StatelessWidget {
   final String label;
-  const UserInfo({Key? key, required this.label}) : super(key: key);
+  final Widget? content;
+  const UserInfo({Key? key, required this.label, this.content})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +146,7 @@ class UserInfo extends StatelessWidget {
               iconPlacement: ExpandablePanelIconPlacement.left,
               iconPadding: EdgeInsets.only(right: 16.0, top: 2.0),
             ),
-            expanded: Container(),
+            expanded: content ?? Container(),
             collapsed: Container(),
             header: Text(
               label,
