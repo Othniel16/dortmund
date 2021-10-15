@@ -55,12 +55,12 @@ class _RightWidgetState extends State<RightWidget> {
 
   final String email = 'hello@sistazshare.org';
 
-  late CarouselPagesProvider pagesProvider;
+  late PagesProvider pagesProvider;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    pagesProvider = Provider.of<CarouselPagesProvider>(context, listen: false);
+    pagesProvider = Provider.of<PagesProvider>(context, listen: false);
   }
 
   @override
@@ -166,7 +166,6 @@ class _RightWidgetState extends State<RightWidget> {
 
   void onBackToHomeTap() {
     pagesProvider.togglePageIndex(0);
-    carouselController.animateToPage(pagesProvider.currentPage);
 
     // todo
     // reset any form data
