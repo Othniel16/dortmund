@@ -20,8 +20,9 @@ class LeftWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.only(bottom: screenHeight / 20),
-      child: Image.asset(Images.woman),
+      padding:
+          EdgeInsets.only(bottom: screenHeight / 20, top: screenHeight / 15),
+      child: Center(child: Image.asset(Images.woman)),
     );
   }
 }
@@ -43,6 +44,8 @@ class _RightWidgetState extends State<RightWidget> {
   final String invite = '''We’d like you to be a part of this project – your
 submission to our quick survey is welcome  ❤''';
 
+  final _formKey = GlobalKey<FormState>();
+
   late PagesProvider pagesProvider;
 
   @override
@@ -58,78 +61,86 @@ submission to our quick survey is welcome  ❤''';
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
           sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
+      double buttonTextSize = sizingInformation.isMobile ? 10.0 : 16.0;
       return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(
           left: screenWidth / 25,
-          right: screenHeight / 25,
           top: screenHeight / 35,
+          right: screenHeight / 25,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(color: Colors.white, fontSize: titleSize),
-            ),
-            const SizedBox(height: 30.0),
-            Text(
-              invite,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: FontSizes.regular,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(color: Colors.white, fontSize: titleSize),
               ),
-            ),
-            const SizedBox(height: 20.0),
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 3,
-            ),
-            const SizedBox(height: 30.0),
-            UserInfoItem(label: 'Name', content: nameInput()),
-            UserInfoItem(label: 'Gender', content: genderList()),
-            UserInfoItem(label: 'Country', onHeaderTap: showCountryList),
-            UserInfoItem(label: 'Age Group', content: ageList()),
-            UserInfoItem(label: 'Occupation', content: occupationInput()),
-            UserInfoItem(label: 'Social media url', content: urlInput()),
-            UserInfoItem(
-                label: 'Interest in women\'s affairs', content: interestList()),
-            UserInfoItem(
-              label: 'Outlook on women\'s empowerment',
-              content: noteInput(),
-            ),
-            const SizedBox(height: 20.0),
-            ArgonButton(
-              height: 35,
-              width: 83,
-              color: Colors.white,
-              child: Text(
-                submit,
+              const SizedBox(height: 30.0),
+              Text(
+                invite,
                 style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: FontSizes.regular,
                 ),
               ),
-              loader: Container(
-                padding: const EdgeInsets.all(10.0),
-                child: const CircularProgressIndicator(
-                  color: Colors.black,
-                  strokeWidth: 1.5,
-                ),
+              const SizedBox(height: 20.0),
+              const CustomDivider(),
+              const SizedBox(height: 30.0),
+              UserInfoItem(label: 'Name *', content: nameInput()),
+              UserInfoItem(label: 'Gender', content: genderList()),
+              UserInfoItem(label: 'Country *', onHeaderTap: showCountryList),
+              UserInfoItem(label: 'Age Group *', content: ageList()),
+              UserInfoItem(label: 'Occupation *', content: occupationInput()),
+              UserInfoItem(label: 'Social media url', content: urlInput()),
+              UserInfoItem(
+                  label: 'Interest in women\'s affairs *',
+                  content: interestList()),
+              UserInfoItem(
+                label: 'Outlook on women\'s empowerment',
+                content: noteInput(),
               ),
-              onTap: (startLoading, stopLoading, btnState) async {
-                if (btnState == ButtonState.Idle) {
-                  startLoading();
-                  await Future.delayed(const Duration(seconds: 3));
-                  stopLoading();
-                  await Future.delayed(const Duration(seconds: 1));
-                  onSubmitTap();
-                }
-              },
-            ),
-            SizedBox(height: screenHeight / 20),
-          ],
+              const SizedBox(height: 20.0),
+              Row(
+                children: [
+                  ArgonButton(
+                    height: 35,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      submit,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: buttonTextSize,
+                        letterSpacing: 1.35,
+                      ),
+                    ),
+                    loader: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      child: const CircularProgressIndicator(
+                        color: Colors.black,
+                        strokeWidth: 1.5,
+                      ),
+                    ),
+                    onTap: (startLoading, stopLoading, btnState) async {
+                      if (btnState == ButtonState.Idle) {
+                        startLoading();
+
+                        stopLoading();
+                        await Future.delayed(const Duration(seconds: 1));
+                        onSubmitTap();
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 30.0),
+                  ActionButtonOutlined(label: 'SKIP', onTap: onSkipTap),
+                ],
+              ),
+              SizedBox(height: screenHeight / 20),
+            ],
+          ),
         ),
       );
     });
@@ -197,12 +208,18 @@ submission to our quick survey is welcome  ❤''';
   Widget occupationInput() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: TextField(
+      child: TextFormField(
         maxLength: 20,
         onChanged: (value) => occupation = value,
         style: const TextStyle(color: Colors.white),
         textCapitalization: TextCapitalization.words,
         decoration: textFieldDeco(hintText: 'Occupation'),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please provide an occupation';
+          }
+          return null;
+        },
       ),
     );
   }
@@ -210,13 +227,19 @@ submission to our quick survey is welcome  ❤''';
   Widget nameInput() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: TextField(
+      child: TextFormField(
         maxLength: 30,
         keyboardType: TextInputType.name,
         onChanged: (value) => name = value,
         style: const TextStyle(color: Colors.white),
         textCapitalization: TextCapitalization.words,
         decoration: textFieldDeco(hintText: 'Name'),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your name';
+          }
+          return null;
+        },
       ),
     );
   }
@@ -265,6 +288,26 @@ submission to our quick survey is welcome  ❤''';
   }
 
   void onSubmitTap() {
+    if (_formKey.currentState!.validate() &&
+        country != null &&
+        interests.isNotEmpty) {
+      pagesProvider.togglePageIndex(pagesProvider.currentPage + 1);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              const Text('All fields marked with an asterisk (*) are required'),
+          action: SnackBarAction(
+            label: 'Dismiss',
+            onPressed: () =>
+                ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+          ),
+        ),
+      );
+    }
+  }
+
+  void onSkipTap() {
     pagesProvider.togglePageIndex(pagesProvider.currentPage + 1);
   }
 }
