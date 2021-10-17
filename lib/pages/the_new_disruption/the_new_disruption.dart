@@ -79,11 +79,7 @@ class _RightWidgetState extends State<RightWidget> {
               ),
             ),
             const SizedBox(height: 20.0),
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 3,
-            ),
+            const CustomDivider(),
             const SizedBox(height: 20.0),
             Text(
               comingSoon,
