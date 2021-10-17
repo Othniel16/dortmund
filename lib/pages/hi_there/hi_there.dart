@@ -61,7 +61,7 @@ submission to our quick survey is welcome  ❤''';
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
           sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
-      double buttonTextSize = sizingInformation.isMobile ? 10.0 : 16.0;
+      double buttonTextSize = sizingInformation.isMobile ? 13.0 : 16.0;
       return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(
