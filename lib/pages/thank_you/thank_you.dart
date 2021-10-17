@@ -25,7 +25,7 @@ class LeftWidget extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screenHeight / 20),
-      child: Image.asset(Images.twoPhones),
+      child: Center(child: Image.asset(Images.twoPhones)),
     );
   }
 }
@@ -100,16 +100,9 @@ class _RightWidgetState extends State<RightWidget> {
                   ]),
             ),
             const SizedBox(height: 20.0),
-            // divider
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 3,
-            ),
+            const CustomDivider(),
             const SizedBox(height: 20.0),
-
             const SocialMediaIcons(),
-
             const SizedBox(height: 50.0),
             ConstrainedBox(
               constraints: BoxConstraints(
@@ -127,12 +120,7 @@ class _RightWidgetState extends State<RightWidget> {
               ),
             ),
             const SizedBox(height: 20.0),
-            // divider
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 4,
-            ),
+            const CustomDivider(),
             const SizedBox(height: 20.0),
             Text(
               email,
@@ -141,11 +129,8 @@ class _RightWidgetState extends State<RightWidget> {
                 fontSize: FontSizes.regular,
               ),
             ),
-
             const SizedBox(height: 30.0),
-
             ActionButton(label: backToHome, onTap: onBackToHomeTap),
-
             SizedBox(height: screenHeight / 20),
           ],
         ),
