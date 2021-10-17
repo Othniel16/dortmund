@@ -12,7 +12,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(builder: (context, sizingInformation) {
-      double buttonTextSize = sizingInformation.isMobile ? 10.0 : 16.0;
+      double buttonTextSize = sizingInformation.isMobile ? 13.0 : 16.0;
       return InkWell(
         onTap: onTap,
         child: Container(
@@ -48,7 +48,7 @@ class ActionButtonOutlined extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(builder: (context, sizingInformation) {
-      double buttonTextSize = sizingInformation.isMobile ? 10.0 : 16.0;
+      double buttonTextSize = sizingInformation.isMobile ? 13.0 : 16.0;
       return InkWell(
         onTap: onTap,
         child: Container(
