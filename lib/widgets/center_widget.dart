@@ -19,7 +19,7 @@ class CenterWidget extends StatelessWidget {
                 children: [
                   ConstrainedBox(
                     child: leftChild,
-                    constraints: BoxConstraints(maxHeight: screenHeight / 3),
+                    constraints: BoxConstraints(maxHeight: screenHeight / 1.8),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
