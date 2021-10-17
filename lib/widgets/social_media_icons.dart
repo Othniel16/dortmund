@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SocialMediaIcons extends StatelessWidget {
   const SocialMediaIcons({Key? key}) : super(key: key);
 
-  final double imageSize = 30.0;
+  final double imageSize = 25.0;
 
   @override
   Widget build(BuildContext context) {
