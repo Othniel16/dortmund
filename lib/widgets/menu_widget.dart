@@ -46,7 +46,7 @@ class RightWidget extends StatelessWidget {
   const RightWidget({Key? key}) : super(key: key);
 
   final String comingSoon = 'Coming Soon';
-  final String launchDate = 'JAN : 2022';
+  final String launchDate = '2022';
   final String launching = 'Launching our mobile app ⌛';
 
   @override
@@ -79,10 +79,14 @@ class RightWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-            Container(
-              color: Colors.grey,
-              height: 1.5,
-              width: MediaQuery.of(context).size.width / 2.8,
+            const CustomDivider(),
+            const SizedBox(height: 20.0),
+            Row(
+              children: const [
+                Icon(AntDesign.android1, color: Colors.white),
+                SizedBox(width: 20.0),
+                Icon(AntDesign.apple1, color: Colors.white),
+              ],
             ),
             const SizedBox(height: 30.0),
             Text(
