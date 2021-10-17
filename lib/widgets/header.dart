@@ -23,7 +23,7 @@ class _HeaderState extends State<Header> {
       } else {
         maxLogoWidth = MediaQuery.of(context).size.width / 3.5;
       }
-      double menuTextSize = sizingInformation.isMobile ? 14.0 : 16.0;
+      double menuTextSize = sizingInformation.isMobile ? 13.0 : 16.0;
       double headerPadding =
           sizingInformation.isMobile ? screenWidth / 25 : 0.0;
       return Padding(
@@ -39,16 +39,16 @@ class _HeaderState extends State<Header> {
                     ? MediaQuery.of(context).size.height / 30
                     : MediaQuery.of(context).size.height / 12,
               ),
-              child: sizingInformation.isMobile
-                  ? Image.asset(Images.logoAbstract)
-                  : Image.asset(Images.logo),
+              child: Image.asset(Images.logo),
             ),
             InkWell(
+              hoverColor: Colors.transparent,
+              mouseCursor: SystemMouseCursors.click,
               child: Text(
                 isMenuOpen ? 'CLOSE' : 'MENU',
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
                   fontSize: menuTextSize,
+                  letterSpacing: 1.35,
                 ),
               ),
               onTap: onMenuPress,
