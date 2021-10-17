@@ -24,6 +24,7 @@ dependencies:
 
   flutter_bounce: ^1.1.0
   flutter_slider_drawer: ^2.0.0
+  flutter_vector_icons: ^1.0.0
 
   group_button: ^3.3.1
 
