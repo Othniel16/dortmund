@@ -15,8 +15,8 @@ class Images {
 
 class FontSizes {
   static const large = 45.0;
-  static const semiLarge = 35.0;
-  static const regular = 18.0;
+  static const semiLarge = 38.0;
+  static const regular = 20.0;
 }
 
 class SiteColors {
