@@ -18,10 +18,10 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      Images.disruption,
-      fit: BoxFit.cover,
+    return SizedBox(
       width: double.infinity,
+      height: MediaQuery.of(context).size.height / 2,
+      child: Image.asset(Images.aneteLusina, fit: BoxFit.cover),
     );
   }
 }
@@ -34,13 +34,11 @@ class RightWidget extends StatefulWidget {
 }
 
 class _RightWidgetState extends State<RightWidget> {
-  final String joinUs = 'JOIN US';
-
   final String title = 'The New Disruption';
 
-  final String womensMagazine = 'A women\'s magazine';
+  final String subTitle = 'A women\'s magazine';
 
-  final String comingSoon = 'Coming Soon';
+  final String message = 'Echoing female voices - in a digital medium 🌻';
 
   late PagesProvider pagesProvider;
 
@@ -52,52 +50,47 @@ class _RightWidgetState extends State<RightWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return ResponsiveBuilder(builder: (context, sizingInformation) {
       double titleSize =
-          sizingInformation.isMobile ? FontSizes.semiLarge : FontSizes.large;
-      return Container(
-        padding: EdgeInsets.only(
-          left: screenWidth / 25,
-          right: screenHeight / 25,
-          top: screenHeight / 35,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(color: Colors.white, fontSize: titleSize),
+          sizingInformation.isMobile ? FontSizes.largeMobile : FontSizes.large;
+      double subtitleSize = sizingInformation.isMobile
+          ? FontSizes.regularMobile
+          : FontSizes.regular;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(color: Colors.white, fontSize: titleSize),
+          ),
+          SizedBox(height: screenHeight / 20.7),
+          Text(
+            subTitle,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: subtitleSize,
             ),
-            const SizedBox(height: 30.0),
-            Text(
-              womensMagazine,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: FontSizes.regular,
-              ),
+          ),
+          SizedBox(height: screenHeight / 31.05),
+          const CustomDivider(),
+          SizedBox(height: screenHeight / 31.05),
+          Text(
+            message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: subtitleSize,
             ),
-            const SizedBox(height: 20.0),
-            const CustomDivider(),
-            const SizedBox(height: 20.0),
-            Text(
-              comingSoon,
-              style: const TextStyle(
-                color: SiteColors.brown,
-                fontSize: FontSizes.regular,
-              ),
-            ),
-            const SizedBox(height: 30.0),
-            ActionButton(label: joinUs, onTap: onJoinUsTap),
-            SizedBox(height: screenHeight / 20),
-          ],
-        ),
+          ),
+          SizedBox(height: screenHeight / 20.7),
+          ActionButton(label: 'NEXT', onTap: onJoinUsTap),
+        ],
       );
     });
   }
 
   void onJoinUsTap() {
+    carouselController.animateToPage(pagesProvider.currentPage + 1);
     pagesProvider.togglePageIndex(pagesProvider.currentPage + 1);
   }
 }
