@@ -18,15 +18,15 @@ class CenterWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: screenHeight / 2),
                     child: leftChild,
-                    constraints: BoxConstraints(maxHeight: screenHeight / 1.8),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: screenHeight / 35,
-                      bottom: screenHeight / 10,
-                      left: screenWidth / 25,
-                      right: screenWidth / 25,
+                      top: screenHeight / 15,
+                      left: screenWidth / 28,
+                      right: screenWidth / 28,
+                      bottom: screenHeight / 15,
                     ),
                     child: rightChild,
                   ),
@@ -44,9 +44,9 @@ class CenterWidget extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: sizingInformation.isMobile ? screenWidth / 25 : 0.0,
-                      right: screenWidth / 25,
-                      top: screenHeight / 35,
+                      top: screenHeight / 10,
+                      left: screenWidth / 25,
+                      right: screenWidth / 28,
                     ),
                     child: rightChild,
                   ),
