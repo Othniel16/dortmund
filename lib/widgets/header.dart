@@ -21,9 +21,9 @@ class _HeaderState extends State<Header> {
       } else if (sizingInformation.isTablet) {
         maxLogoWidth = MediaQuery.of(context).size.width / 5.5;
       } else {
-        maxLogoWidth = MediaQuery.of(context).size.width / 3.5;
+        maxLogoWidth = MediaQuery.of(context).size.width / 2.5;
       }
-      double menuTextSize = sizingInformation.isMobile ? 13.0 : 16.0;
+
       double headerPadding =
           sizingInformation.isMobile ? screenWidth / 25 : 0.0;
       return Padding(
@@ -36,40 +36,36 @@ class _HeaderState extends State<Header> {
               constraints: BoxConstraints(
                 maxWidth: maxLogoWidth,
                 maxHeight: sizingInformation.isMobile
-                    ? MediaQuery.of(context).size.height / 30
+                    ? MediaQuery.of(context).size.height / 26
                     : MediaQuery.of(context).size.height / 12,
               ),
               child: Image.asset(Images.logo),
             ),
-            InkWell(
-              hoverColor: Colors.transparent,
-              mouseCursor: SystemMouseCursors.click,
-              child: Text(
-                isMenuOpen ? 'CLOSE' : 'MENU',
-                style: TextStyle(
-                  fontSize: menuTextSize,
-                  letterSpacing: 1.35,
-                ),
-              ),
-              onTap: onMenuPress,
+            Consumer<PagesProvider>(
+              builder: (context, pageProvider, child) {
+                return InkWell(
+                  mouseCursor: SystemMouseCursors.click,
+                  child: AnimatedSmoothIndicator(
+                    activeIndex: pageProvider.currentPage,
+                    count: pageProvider.pages.length,
+                    effect: WormEffect(
+                      spacing: 18.0,
+                      dotWidth: 9.0,
+                      dotHeight: 9.0,
+                      activeDotColor: Colors.black,
+                      dotColor: Colors.grey.withOpacity(0.3),
+                    ),
+                    onDotClicked: (int index) {
+                      carouselController.animateToPage(index);
+                      pageProvider.togglePageIndex(index);
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
       );
     });
-  }
-
-  void onMenuPress() {
-    if (menuKey.currentState!.isDrawerOpen) {
-      menuKey.currentState!.closeDrawer();
-      setState(() {
-        isMenuOpen = false;
-      });
-    } else {
-      menuKey.currentState!.openDrawer();
-      setState(() {
-        isMenuOpen = true;
-      });
-    }
   }
 }
