@@ -20,10 +20,7 @@ dependencies:
 
   dots_indicator: ^2.0.0
 
-  expandable: ^5.0.1
-
   flutter_bounce: ^1.1.0
-  flutter_slider_drawer: ^2.0.0
   flutter_vector_icons: ^1.0.0
 
   group_button: ^3.3.1
@@ -32,7 +29,11 @@ dependencies:
 
   responsive_builder: ^0.4.1
 
+  smooth_page_indicator: ^1.0.0+2
+
   term_glyph: ^1.2.0
+
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
